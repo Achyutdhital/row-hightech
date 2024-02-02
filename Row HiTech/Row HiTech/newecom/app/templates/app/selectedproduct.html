@@ -1,0 +1,328 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+All Category
+{% endblock %}
+{% block content %}
+<style>
+    .ltn__slide-item {
+        height: 500px;
+        background-size: cover;
+        background-position: center center;
+    }
+    .product-img-container {
+        height: 200px; /* Set the desired height for all image containers */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Hide any image overflow if necessary */
+      }
+      
+</style>
+    <div class="ltn__utilize-overlay"></div>
+ <!-- SLIDER AREA START (slider-3) -->
+ <div class="ltn__slider-area ltn__slider-3  section-bg-1">
+    <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white">
+        {% for slide_item in slider %}
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3 text-color-white bg-image" data-bg="{{ slide_item.slider_img.url }}">
+                <div class="ltn__slide-item-inner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        {% comment %} <div class="slide-video mb-50 d-none">
+                                            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="#" data-rel="lightcase:myCollection">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                        </div> {% endcomment %}
+                                        <h6 class="slide-sub-title animated">
+                                        {% comment %} <h1 class="slide-title animated">{{ slide_item.title }}</h1> {% endcomment %}
+                                        <div class="slide-brief animated">
+                                            {% comment %} <p>{{ slide_item.description }}</p> {% endcomment %}
+                                        </div>
+                                        <div class="btn-wrapper animated">
+                                            {% comment %} <a href="#" class="theme-btn-1 btn btn-effect-1 text-uppercase">Product</a> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- SLIDER AREA END -->
+    <!-- BREADCRUMB AREA START -->
+    {% comment %} <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image plr--9---" data-bg="{% static 'app/img/bg/9.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="section-title-area ltn__section-title-2">
+                            <h6 class="section-subtitle ltn__secondary-color">//  Welcome to our company</h6>
+                            <h1 class="section-title white-color">Shop Left Sidebar</h1>
+                        </div>
+                        <div class="ltn__breadcrumb-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Shop Left Sidebar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <!-- BREADCRUMB AREA END -->
+    
+    <!-- PRODUCT DETAILS AREA START -->
+    <div class="ltn__product-area ltn__product-gutter  mt-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 order-lg-2 mb-120">
+                    <div class="ltn__shop-options">
+                        <ul>
+                            <li>
+                                <div class="ltn__grid-list-tab-menu ">
+                                    <div class="nav">
+                                        <a class="active show" data-bs-toggle="tab" href="#liton_product_grid"><i class="fas fa-th-large"></i></a>
+                                        <a data-bs-toggle="tab" href="#liton_product_list"><i class="fas fa-list"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% comment %} <li>
+                               <div class="short-by text-center">
+                                    <select class="nice-select">
+                                        <option>Default sorting</option>
+                                        <option>Sort by popularity</option>
+                                        <option>Sort by new arrivals</option>
+                                        <option>Sort by price: low to high</option>
+                                        <option>Sort by price: high to low</option>
+                                    </select>
+                                </div> 
+                            </li> {% endcomment %}
+                            {% comment %} <li>
+                               <div class="showing-product-number text-right text-end">
+                                    <span>Showing 9 of 20 results</span>
+                                </div> 
+                            </li> {% endcomment %}
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="liton_product_grid">
+                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                <div class="row">
+                                    <!-- ltn__product-item -->
+                                    {% for sub_category in sub_category %}
+                                        {% for product_image in sub_category.product_images.all|slice:":1" %}
+
+                                    <div class="col-xl-4 col-sm-6 col-6">
+                                        <div class="ltn__blog-item ltn__blog-item-3 ltn__product-item-3 text-center">
+                                            <div class="ltn__blog-img">
+                                                <a href="{% url 'app:product_description' sub_category.last_ctg_slug %}"><img src="{{product_image.image.url}}"  style="height:200px; width:300px;object-fit: cover;" alt="#"></a>
+                                               
+                                       
+                                            </div>
+                                            <div class="product-info">
+                                                
+                                                <h2 class="product-title"><a href="{% url 'app:product_description' sub_category.last_ctg_slug %}">{{sub_category.name}}</a></h2>
+                                                <div class="product-price">
+                                                   
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endfor%}
+                                    {% endfor%}
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="liton_product_list">
+                            <div class="ltn__product-tab-content-inner ltn__product-list-view">
+                                <div class="row">
+                                    {% for sub_category in sub_category %}
+                                        {% for product_image in sub_category.product_images.all|slice:":1" %}
+                                    <!-- ltn__product-item -->
+                                    <div class="col-lg-12">
+                                        <div class="ltn__product-item ltn__product-item-3">
+                                            <div class="product-img product-img-container">
+                                                <a href="{% url 'app:product_description' sub_category.last_ctg_slug %}"><img src="{{product_image.image.url}}" style="height:200px; width:400px;object-fit: cover;"  alt="#"></a>
+                                              
+                                            </div>
+                                            <div class="product-info">
+                                                <h2 class="product-title"><a href="{% url 'app:product_description' sub_category.last_ctg_slug %}">{{sub_category.name}}</a></h2>
+                                            
+                                              
+                                                <div class="product-brief">
+                                                    <p>{{sub_category.description|safe|truncatechars:200}}</p>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endfor%}
+                                    {%endfor%}
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ltn__pagination-area text-center">
+                            <div class="ltn__pagination">
+                                <ul>
+                                    
+                                                                <!-- First page link -->
+                                {% if sub_category.has_previous %}
+                                <li><a href="?page=1"><i class="fas fa-angle-double-left"></i></a></li>
+                                {% endif %}
+
+                                <!-- Previous page link -->
+                                {% if sub_category.has_previous %}
+                                <li><a href="?page={{ sub_category.previous_page_number }}">{{ sub_category.previous_page_number }}</a></li>
+                                {% endif %}
+
+                                <!-- Current page -->
+                                <li class="active"><span>{{ sub_category.number }}</span></li>
+
+                                <!-- Next page link -->
+                                {% if sub_category.has_next %}
+                                <li><a href="?page={{ sub_category.next_page_number }}">{{ sub_category.next_page_number }}</a></li>
+                                {% endif %}
+
+                                <!-- Last page link -->
+                                {% if sub_category.has_next %}
+                                <li><a href="?page={{ sub_category.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a></li>
+                                {% endif %}
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-lg-4  mb-120">
+                    <aside class="sidebar ltn__shop-sidebar">
+                        <!-- Category Widget -->
+                     
+                        <div class="widget ltn__menu-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+                            <div class="ltn__category-menu-toggle ltn__one-line-active">
+                                <ul>
+                                    <!-- Loop through MainProductCategory objects -->
+                                    {% for main_category in main_categories %}
+                                        <li class="ltn__category-menu-item ltn__category-menu-drop">
+                                            <a href="#">
+                                                <i class="icon-shopping-bags"></i>{{ main_category.product_name }}
+                                            </a>
+                                            <ul class="ltn__category-submenu ltn__category-column-5">
+                                                <!-- Loop through SubProductCategory objects for this MainProductCategory -->
+                                                {% for sub_category in main_category.sub_categories.all %}
+                                                    <li class="ltn__category-submenu-title ltn__category-menu-drop">
+                                                        <a href="{% url 'app:product' sub_category.ctg_slug %}">{{ sub_category.title }}</a>
+                                                        <ul class="ltn__category-submenu-children">
+                                                            <!-- Loop through LastSubProductCategory objects for this SubProductCategory -->
+                                                            {% for last_sub_category in sub_category.last_sub_categories.all %}
+                                                                <li><a href="{% url 'app:product_description' last_sub_category.last_ctg_slug %}">{{ last_sub_category.name }}</a></li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                
+                            </div>
+                        </div>
+                        
+
+{% comment %} 
+                        <div class="widget ltn__menu-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+                            <div class="ltn__category-menu-toggle ltn__one-line-active">
+                                <ul>
+                                    <!-- Submenu Column - unlimited -->
+                                    <li class="ltn__category-menu-item ltn__category-menu-drop">
+                                        <a href="shop.html"><i class="icon-shopping-bags"></i>Vegetables and Fruits </a>
+                                        <ul class="ltn__category-submenu ltn__category-column-5">
+                                            <li class="ltn__category-submenu-title ltn__category-menu-drop"><a href="#">Handbags</a>
+                                                <ul class="ltn__category-submenu-children">
+                                                    <li><a href="#">Clutches Clutches Clutches Clutches </a></li>
+                                                    <li><a href="#">Cross Body</a></li>
+                                                    
+                                                    <li><a href="#">Satchels</a></li>
+                                                    <li><a href="#">Sholuder</a></li>
+                                                    <li><a href="#">Toter</a></li>
+                                             
+                                                </ul>
+                                            </li>
+                                           
+                                            
+                                            <li class="ltn__category-submenu-title ltn__category-menu-drop"><a href="#">Fresh Meat</a>
+                                                <ul class="ltn__category-submenu-children">
+                                                    <li><a href="#">Clutches</a></li>
+                                                    <li><a href="#">Cross Body</a></li>
+                                                    <li><a href="#">Satchels</a></li>
+                                                    <li><a href="#">Sholuder</a></li>
+                                                    <li><a href="#">Toter</a></li>
+                                                </ul>
+                                            </li>
+                                      
+                                        </ul>
+                                    </li>
+                               
+                                </ul>
+                            </div>
+                        </div>
+                         {% endcomment %}
+                        <!-- Price Filter Widget -->
+                      
+                        <!-- Top Rated Product Widget -->
+                        <div class="widget ltn__top-rated-product-widget">
+                            <h4 class="ltn__widget-title ltn__widget-title-border">Top Rated Product</h4>
+                            <ul>
+                                {% for product in last_sub_category|slice:":5" %}
+                                {% for product_image in product.product_images.all|slice:":1" %}
+                                <li>
+                                    <div class="top-rated-product-item clearfix">
+                                        <div class="top-rated-product-img">
+                                            <a href="{% url 'app:product_description' product.last_ctg_slug %}"><img src="{{product_image.image.url}}" width="100px" height="50px" alt="#"></a>
+
+                                            {% comment %} <a href=""><img src="{% static 'app/img/product/1.png'%}" alt="#"></a> {% endcomment %}
+                                        </div>
+                                        <div class="top-rated-product-info">
+                                            
+                                            <h6><a href="{% url 'app:product_description' product.last_ctg_slug %}">{{product.name}}</a></h6>
+                                         
+                                        </div>
+                                    </div>
+                                </li>
+                                {%endfor%}
+                                {%endfor%}
+                             
+                            </ul>
+                        </div>
+                       
+                      
+                        <!-- Size Widget -->
+                   
+                        <!-- Banner Widget -->
+                        {% for item in bannerImg|slice:"0:1"%}
+                        <div class="widget ltn__banner-widget">
+                            <a href="{% url 'app:allCategory' %}"><img src="{{ item.banner_Img.url }}" width="400px" height="200px" alt="#"></a>
+                        </div>
+                        {%endfor%}
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT DETAILS AREA END -->
+
+{% endblock%}

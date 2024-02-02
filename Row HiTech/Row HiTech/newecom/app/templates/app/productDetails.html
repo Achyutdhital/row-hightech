@@ -1,0 +1,270 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+Product Details
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="path/to/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function validateNumber(input) {
+        const number = input.value.replace(/\D/g, ''); // Remove non-digit characters
+
+        if (number.length === 10 && /^\d+$/.test(number)) {
+            document.getElementById('validationMessage').textContent = '';
+        } else {
+            document.getElementById('validationMessage').textContent = 'Please enter a valid 10-digit number.';
+        }
+    }
+</script>
+<style>
+    .ltn__right-sidebar {
+        margin-top: -40px;
+    }
+    
+
+</style>
+<style>
+
+    .product-img-container {
+        height: 200px; /* Set the desired height for all image containers */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Hide any image overflow if necessary */
+      }
+      
+</style>
+    <div class="ltn__utilize-overlay"></div>
+
+    <!-- BREADCRUMB AREA START -->
+    {% comment %} <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bg="{% static 'app/img/bg/9.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="section-title-area ltn__section-title-2">
+                            <h6 class="section-subtitle ltn__secondary-color">//  Welcome to our company</h6>
+                            <h1 class="section-title white-color">Product Details</h1>
+                        </div>
+                        <div class="ltn__breadcrumb-list">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Product Details</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <div class="ltn__slider-area ltn__slider-3  section-bg-1">
+        <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white">
+            {% for slide_item in slider %}
+                <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3 text-color-white bg-image" data-bg="{{ slide_item.slider_img.url }}">
+                    <div class="ltn__slide-item-inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 align-self-center">
+                                    <div class="slide-item-info">
+                                        <div class="slide-item-info-inner ltn__slide-animation">
+                                            {% comment %} <div class="slide-video mb-50 d-none">
+                                                <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="#" data-rel="lightcase:myCollection">
+                                                    <i class="fa fa-play"></i>
+                                                </a>
+                                            </div> {% endcomment %}
+                                            <h6 class="slide-sub-title animated">
+                                            <h1 class="slide-title animated"></h1>
+                                            <div class="slide-brief animated">
+                                                {% comment %} <p>{{ slide_item.description }}</p> {% endcomment %}
+                                            </div>
+                                            <div class="">
+                                                <a href="#" class=" text-uppercase"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- BREADCRUMB AREA END -->
+
+    <!-- SHOP DETAILS AREA START -->
+    <div class="ltn__shop-details-area mt-120 pb-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12 col-md-12">
+                    <div class="ltn__shop-details-inner mb-60">
+                        <div class="row">
+                            <div class=" col-lg-7 col-md-7">
+                                <div class="ltn__shop-details-img-gallery">
+                                    <div class="ltn__shop-details-large-img">
+                                        {% for image in data.product_images.all %}
+                                            <div class="single-large-img">
+                                                <a href="{{ image.image.url }}" data-rel="lightcase:myCollection">
+                                                    <img src="{{ image.image.url }}" style="height:700px; width:650px; object-fit: cover;" alt="Image">
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                       
+                                    </div>
+                                    <div class="ltn__shop-details-small-img slick-arrow-2">
+                                        {% for image in data.product_images.all %}
+                                            <div class="single-small-img">
+                                                <img src="{{ image.image.url }}" height="120px" width="200px" alt="Image">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-5 col-12 col-md-5">
+                                <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar ">
+                                    <!-- Shop Tab Start -->
+                                    <div class="ltn__shop-details-tab-inner ltn__shop-details-tab-inner-2">
+                            
+                                        <div class="ltn__shop-details-tab-menu">
+                                            <div class="nav">
+                                                <a class="nav-link active show" data-toggle="tab" href="#liton_tab_details_1_1">Description</a>
+                                                <a class="nav-link" data-toggle="tab" href="#liton_tab_details_1_2">Enquiry</a>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="liton_tab_details_1_1">
+                                                <div class="ltn__shop-details-tab-content-inner">
+                                                    <h4 class="title-2">{{data.name}}</h4>
+                                                    <p>{{data.description|safe}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="liton_tab_details_1_2">
+                                                <div class="ltn__shop-details-tab-content-inner">
+                                                    
+                                                    <div class="ltn__comment-reply-area ltn__form-box mb-30">
+                                                        <form method="post" action="{% url 'app:enquiry' %}">
+                                                            {% csrf_token %}
+                                                            <h4 class="title-2">Add a Review</h4>
+                            
+                                                           <div class="input-item input-item-item ">
+                                                                <input type="text" value="{{ data.name }}" name="product" >
+                                                                {{ form.errors }}
+                                                            </div> 
+                                                            <!-- Rest of the form elements go here -->
+                                                            <div class="input-item input-item-name ltn__custom-icon">
+                                                                <input type="text" name="name" placeholder="Type your name....">
+                                                                {{ form.errors }}
+                                                            </div>
+                                                            
+                                                            <div class="input-item input-item-email ltn__custom-icon">
+                                                                <input type="email" name="email" placeholder="Type your email....">
+                                                                {{ form.errors }}
+                                                            </div>
+                                                            <div class="input-item input-item-phone ltn__custom-icon">
+                                                                <input type="text" id="numberInput" oninput="validateNumber(this)" pattern="[0-9]{10}" required name="phone" placeholder="Type your phone number....">
+                                                                {{ form.errors }}
+                                                                <span id="validationMessage"></span>
+                                                            </div>
+                            
+                                                            <div class="input-item input-item-textarea ltn__custom-icon">
+                                                                <textarea name="message" placeholder="Type your comments...."></textarea>
+                                                                 {{ form.errors }}
+                                                            </div>
+                                                            <div class="btn-wrapper">
+                                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    <!-- SHOP DETAILS AREA END -->
+
+    <!-- PRODUCT SLIDER AREA START -->
+    <div class="ltn__product-slider-area ltn__product-gutter pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h1 class="section-title">Related Products<span>.</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__related-product-slider-one-active slick-arrow-1">
+                <!-- ltn__product-item -->
+                {% comment %} {% for product in main_categories %}
+                {% for sub_category in product.sub_categories.all %}
+                {% for last_sub_category in sub_category.last_sub_categories.all %} {% endcomment %}
+                {% for related_product in related_products %}
+                <!-- Inside the loop where you display products -->
+                <div class="col-lg-12">
+                    {% for product_image in related_product.product_images.all|slice:":1" %}
+                    <div class="ltn__blog-item ltn__blog-item-3 ltn__product-item-3 text-center">
+                        <div class="ltn__blog-img">
+                                <a href="#" class="product-link">
+                                    <img src="{{ product_image.image.url }}" alt="#" style="height:200px; width:300px;object-fit: cover;">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-title">
+                                    <a href="#" class="product-link">
+                                        {{ related_product.name }}
+                                    </a>
+                                </h2>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% comment %} {%endfor%}
+                {%endfor%} {% endcomment %}
+                {%endfor%}
+               
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT SLIDER AREA END -->
+<!-- Add your JavaScript and Bootstrap scripts here -->
+<!-- Add your Bootstrap scripts here -->
+<script src="path/to/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Initialize Bootstrap tabs
+        $('.nav-link').on('click', function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        // Get the active tab from local storage
+        const activeTab = localStorage.getItem('activeTab');
+
+        // If there's an active tab, activate it
+        if (activeTab) {
+            $(`a[href="${activeTab}"]`).tab('show');
+        }
+
+        // Store the active tab in local storage when a tab is shown
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            const tabId = $(e.target).attr('href');
+            localStorage.setItem('activeTab', tabId);
+        });
+    });
+</script>
+    <!-- FEATURE AREA END -->
+{% endblock%}

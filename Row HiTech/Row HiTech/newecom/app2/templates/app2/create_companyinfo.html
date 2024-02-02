@@ -1,0 +1,137 @@
+
+
+{% extends 'app2/base.html' %}
+{% load static %}
+{% block title %} 
+{% if instance %}Edit Company Info{% else %}Add Company Info{% endif %}
+{% endblock %}
+{% block body %}
+<title>{% if instance %}Edit Company Info{% else %}Add Company Info{% endif %}
+</title>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">{% if instance %}Edit Company Info{% else %}Add Company Info{% endif %}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+                      
+                        <form method="post" enctype="multipart/form-data" action="{% if instance %}{% url 'dashboard:companyinfo' %}{% else %}{% url 'dashboard:companyinfo' %}{% endif %}">
+                            {% csrf_token %}
+                                {% if messages %}
+                                {% for msg in messages %}
+                                    <div class="alert alert-{{ msg.tags }} alert-dismissible text-bg-{{ msg.tags }} border-0 fade show" role="alert">
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <strong>{% if msg.tags == 'success' %}Success{% elif msg.tags == 'warning' %}Warning{% endif %} - </strong>{{ msg.message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="mb-3">
+                                                    <div class="mb-3">
+                                                        <label for="{{ form.location.id_for_label }}" class="form-label">Location </label>
+                                                        <input type="text" name="{{ form.location.name }}" id="{{ form.location.id_for_label }}" class="form-control" required
+                                                               value="{% if instance %}{{ instance.location }}{% endif %}" placeholder="Enter location">
+                                                    </div>
+                                             
+
+                                                </div>
+                                                
+                                                     <div class="mb-3">
+                                                    <label for="{{ form.phone.id_for_label }}" class="form-label">Contact No: </label>
+                                                    <input type="tel" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}" class="form-control" required
+                                                           value="{% if instance %}{{ instance.phone }}{% endif %}"pattern="[0-9]{10}" title="Please enter a 10-digit phone number" placeholder="Enter phone">
+                                                </div>
+                                        
+
+
+                                                <div class="mb-3">
+                                                    <label for="{{ form.facebook_link.id_for_label }}" class="form-label">Instagram Link</label>
+                                                    <input type="url" name="{{ form.facebook_link.name }}" id="{{ form.facebook_link.id_for_label }}" class="form-control" 
+                                                           value="{% if instance %}{{ instance.facebook_link }}{% endif %}" placeholder="Enter Facebook link">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="{{ form.instagram_link.id_for_label }}" class="form-label">Twitter Link</label>
+                                                    <input type="url" name="{{ form.instagram_link.name }}" id="{{ form.instagram_link.id_for_label }}" class="form-control" 
+                                                           value="{% if instance %}{{ instance.instagram_link }}{% endif %}" placeholder="Enter twitter link">
+                                                </div>
+                                              
+
+                                            </div> <!-- end col-->
+
+                                            <div class="col-xl-6">
+                                                <div class="mb-3">
+                                                    <label for="{{ form.youtube_link.id_for_label }}" class="form-label">Youtube Link</label>
+                                                    <input type="url" name="{{ form.youtube_link.name }}" id="{{ form.youtube_link.id_for_label }}" class="form-control" 
+                                                           value="{% if instance %}{{ instance.youtube_link }}{% endif %}" placeholder="Enter Youtube link">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="{{ form.location_link.id_for_label }}" class="form-label">Location URL</label>
+                                                    <input type="url" name="{{ form.location_link.name }}" id="{{ form.youtube_link.id_for_label }}" class="form-control" 
+                                                           value="{% if instance %}{{ instance.location_link }}{% endif %}" placeholder="Enter location url">
+                                                </div>
+                                        
+                                                     <!-- Date View -->
+
+                                                     <div class="mb-3">
+                                                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                                        <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control" required
+                                                               value="{% if instance %}{{ instance.email }}{% endif %}" placeholder="Enter email">
+                                                    </div>
+                                                
+                                                    <div class="mb-3 mt-3 mt-xl-0">
+                                                        <label for="{{ form.logo.id_for_label }}" class="form-label">Logo:</label>
+                                                        <input type="file" name="{{ form.logo.name }}" id="{{ form.logo.id_for_label }}" class="form-control custom-class" {% if not instance %}required{% endif %} onchange="showPreview(this);">
+                                                        <div id="imageContainer" style="width:auto">   
+                                                            <img class="img-fluid" id="imagePreview" src="{% if instance %}{{ instance.logo.url }}{% endif %}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <br><br>                                               
+                                                </div>
+                                           
+                                            </div> <!-- end col-->
+                                            
+                                            <div class="col-auto">
+                                            {% if instance %}
+                                                <button type="submit" class="btn btn-danger chat-send waves-effect waves-light">Update</button>
+                                            {% else %}
+                                                <button type="submit" class="btn btn-danger chat-send waves-effect waves-light">Add</button>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                        <!-- end row -->
+
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div>
+                        <!-- end row-->
+                    </form>
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+       {%endblock%}

@@ -1,0 +1,183 @@
+
+
+{% extends 'app2/base.html' %}
+{% load static %}
+{% block title %} 
+{% if instance %}Edit ProductCategoryItems{% else %}Edit ProductCategoryItems{% endif %}
+{% endblock %}
+{% block body %}
+<title>{% if instance %}Edit ProductCategoryItems{% else %}Edit ProductCategoryItems{% endif %}
+</title>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Add Product </h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-{{ msg.tags }} alert-dismissible text-bg-{{ msg.tags }} border-0 fade show" role="alert">
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <strong>{% if msg.tags == 'success' %}Success{% elif msg.tags == 'warning' %}Warning{% endif %} - </strong>{{ msg.message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+
+                        <!-- end page title -->
+                        <form method="post" action="{% url 'dashboard:add_ProductCategoryItems' %}" enctype="multipart/form-data" id="form"  data-courses-url="{% url 'dashboard:ajax_load_courses' %}" >
+                            {% csrf_token %}
+                        
+                            {{ form.media }}
+                    
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="mb-3">
+                                                        <label for="{{ form.order_number.id_for_label }}" class="form-label">Order_number:</label>
+                                                        <input type="number" name="{{ form.order_number.name }}" id="{{ form.order_number.id_for_label }}" class="form-control" value="{% if instance %}{{ instance.order_number }}{% endif %}" placeholder="Enter order_number">
+                                                    </div>
+                                                   
+                                                    <div class="mb-3" style="width:auto;">
+                                                        <label  for="" class="form-label" > Main Category: </label><br>
+                                                        <select class="form-control"  id="category" name="main_category" required>
+                                                            <option value="" selected disabled>----Select Main Category----</option>
+                                                            {% for item in main_categories %}
+                                                            <option value="{{item.id}}">{{item.product_name}}</option>
+                                                            {% endfor %}
+                                                            
+                                                        </select>                                                       
+                                                    </div>
+    
+                                                    <div class="mb-3">
+                                                        <label  for="" class="form-label" >Sub Category: </label><br>
+                                                        <select class="form-control"  id="courses" name="sub_category" >
+                                                            <option value="" selected disabled>----Select Sub category----</option>
+                                                            <option value="" > </option>
+                                                            
+                                                        </select>                                                       
+                                                    </div>
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="{{ form.name.id_for_label }}" class="form-label">Product Name:</label>
+                                                        <input type="text" name="{{ form.name.name }}" value="{% if instance %}{{ instance.name }}{% endif %}" id="{{ form.name.id_for_label }}" class="form-control custom-class" placeholder="Product name" required>
+                                                    </div>
+
+                                                    {{ formset.management_form }}
+                                                    <div id="image-formset">
+                                                        {% for formset_form in formset %}
+                                                            {{ formset_form.image.label_tag }}<br>
+                                                            {{ formset_form.image }}
+                                                            {{ formset_form.image.errors }}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <br>
+
+                                                </div>
+                                                    
+                                                <div class="col-xl-6">
+                                                    <div class="mb-3">
+                                                        <label for="{{ form.description.id_for_label }}">Description:</label>
+                                                        {{ form.description }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                                <!-- ... Other form fields ... -->
+                        
+                                           
+                                            <!-- end row -->
+                                            <br>
+                                            <br>
+                                            <div class="col-auto">
+                                                {% comment %} {% if instance %}
+                                                    <button type="submit" class="btn btn-danger chat-send waves-effect waves-light">Update</button>
+                                                {% else %} {% endcomment %}
+                                                <button type="button" id="add-image" class="btn btn-primary">Add Another Image</button>
+
+                                                <button type="submit" class="btn btn-danger chat-send waves-effect waves-light">Add Product</button>
+                                                {% comment %} {% endif %} {% endcomment %}
+                                            </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                        </div>
+                                        <!-- end card-body -->
+                                    </div>
+                                    <!-- end card -->
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
+                        </form>
+                        
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+
+                <script>
+                    // JavaScript to add a new image field when the "Add Image" button is clicked
+                    document.getElementById('add-image').addEventListener('click', function () {
+                        var formset = document.getElementById('image-formset');
+                        var newImageField = document.createElement('div');
+                        newImageField.innerHTML = '{{ formset.empty_form.image.label_tag }} <br>{{ formset.empty_form.image }} {{ formset.empty_form.image.errors }} <br><button type="button" class="remove-image btn btn-warning  ">Remove</button><br> ';
+                        formset.appendChild(newImageField);
+
+
+
+                        formset.appendChild(newImageField);
+
+                            // Attach a click event handler to the new "Remove" button
+                            var removeButtons = document.querySelectorAll('.remove-image');
+                            removeButtons.forEach(function (button) {
+                                button.addEventListener('click', function () {
+                                    formset.removeChild(button.parentElement);
+                                });
+                            });
+                        });
+                </script>
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#category").change(function() {
+                            var url = $("#form").attr("data-courses-url");
+                            var programmingId = $(this).val();
+                            console.log(programmingId);
+                            $.ajax({
+                                url: url,
+                                data: {
+                                    'programming': programmingId
+                                },
+                                success: function(data) {
+                                    $("#courses").html(data);
+                                    //console.log(data);
+                                },
+                                error:function(data){
+                                    console.log(data);
+                                }
+                            });
+                        });
+                    });
+                </script>
+       {%endblock%}

@@ -1,0 +1,343 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+{% block content %}
+<style>
+    .product-img-container {
+        height: 200px; /* Set the desired height for all image containers */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Hide any image overflow if necessary */
+      }
+      .imgcontainer {
+        height: 438px; /* Set the desired height for all image containers */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Hide any image overflow if necessary */
+      }
+      .imgcontainer2 {
+        height: 200px; /* Set the desired height for all image containers */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Hide any image overflow if necessary */
+      }
+
+        .ltn__slide-item {
+            height: 500px;
+            background-size: cover;
+            background-position: center center;
+        }
+ 
+</style>
+    <div class="ltn__utilize-overlay"></div>
+ <!-- SLIDER AREA START (slider-3) -->
+<div class="ltn__slider-area ltn__slider-3  section-bg-1">
+    <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white">
+        {% for slide_item in slider %}
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3 text-color-white bg-image" data-bg="{{ slide_item.slider_img.url }}">
+                <div class="ltn__slide-item-inner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        {% comment %} <div class="slide-video mb-50 d-none">
+                                            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="#" data-rel="lightcase:myCollection">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                        </div> {% endcomment %}
+                                        <h6 class="slide-sub-title animated">
+                                        <h1 class="slide-title animated"></h1>
+                                        <div class="slide-brief animated">
+                                            {% comment %} <p>{{ slide_item.description }}</p> {% endcomment %}
+                                        </div>
+                                        <div class="">
+                                            <a href="#" class=" text-uppercase"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- SLIDER AREA END -->
+    <!-- SLIDER AREA START (slider-3) -->
+    {% comment %} <div class="ltn__slider-area ltn__slider-3  section-bg-1">
+        <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
+            <!-- ltn__slide-item -->
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3">
+                <div class="ltn__slide-item-inner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <div class="slide-video mb-50 d-none">
+                                            <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="https://www.youtube.com/embed/ATI7vfCgwXE?autoplay=1&amp;showinfo=0" data-rel="lightcase:myCollection">
+                                                <i class="fa fa-play"></i>
+                                            </a>
+                                        </div>
+                                        <h6 class="slide-sub-title animated"><img src="{% static 'app/img/icons/icon-img/1.png'%}" alt="#"> 100% genuine Products</h6>
+                                        <h1 class="slide-title animated ">Tasty & Healthy <br>  Organic Food</h1>
+                                        <div class="slide-brief animated d-none">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                        </div>
+                                        <div class="btn-wrapper animated">
+                                            <a href="shop.html" class="theme-btn-1 btn btn-effect-1 text-uppercase">Explore Products</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide-item-img">
+                                    <img src="{% static 'app/img/slider/23.png'%}" alt="#">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ltn__slide-item -->
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3">
+                <div class="ltn__slide-item-inner  text-right text-end">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="slide-item-info">
+                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                        <h6 class="slide-sub-title animated"><img src="{% static 'app/img/icons/icon-img/1.png'%}" alt="#"> 100% genuine Products</h6>
+                                        <h1 class="slide-title animated ">Our Garden's  Most <br>   Favorite Food</h1>
+                                        <div class="slide-brief animated">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                        </div>
+                                        <div class="btn-wrapper animated">
+                                            <a href="shop.html" class="theme-btn-1 btn btn-effect-1 text-uppercase">Explore Products</a>
+                                            <a href="about.html" class="btn btn-transparent btn-effect-3 text-uppercase">LEARN MORE</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide-item-img slide-img-left">
+                                    <img src="{% static 'app/img/slider/21.png'%}" alt="#">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div> {% endcomment %}
+    <!-- SLIDER AREA END -->
+
+    <!-- BANNER AREA START -->
+{% comment %} <div class="ltn__banner-area mt-120 mt--90 d-none">
+        <div class="container">
+            <div class="row ltn__custom-gutter--- justify-content-center">
+                {% for item in adsImg|slice:"0:1"%}
+                <div class="col-lg-4 col-md-6">
+                    <div class="ltn__banner-item">
+                        <div class="ltn__banner-img">
+                            <a href="shop.html"><img src="{{ item.ads_Img.url }}" height="400px" alt="Banner Image"></a>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                {% for item in adsImg|slice:"1:3"%}
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="ltn__banner-item">
+                        <div class="ltn__banner-img">
+                            <a href="shop.html"><img src="{{ item.ads_Img.url }}" height="200px" alt="Banner Image"></a>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            
+            </div>
+        </div>
+    </div>  {% endcomment %}
+    <!-- BANNER AREA END -->
+
+    <!-- BANNER AREA START -->
+    <div class="ltn__banner-area mt-100">
+        <div class="container">
+            <div class="row ltn__custom-gutter--- justify-content-center">
+                {% for item in bannerImg|slice:"0:1"%}
+                <div class="col-12 col-lg-6 col-md-6">
+                    <div class="ltn__banner-item ">
+                        <div class="ltn__banner-img ">
+                            <a href="shop.html"><img src="{{ item.banner_Img.url }}" width="600px" height="450px" alt="Banner Image"></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-12 col-lg-4 col-md-6">
+                    <div class="row">
+                        {% for item in bannerImg|slice:"1:3"%}
+                        <div class="col-lg-12">
+                            <div class="ltn__banner-item ">
+                                <div class="ltn__banner-img ">
+                                    <a href="shop.html"><img src="{{ item.banner_Img.url }}" width="400px" height="210px" alt="Banner Image"></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- BANNER AREA END -->
+
+<!-- PRODUCT TAB AREA START (product-item-3) -->
+<div class="ltn__product-tab-area  ltn__product-gutter pt-15 pb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2--- text-center">
+                    <h1 class="section-title">Our Products</h1>
+                </div>
+                <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right-- text-uppercase text-center">
+                    <div class="nav">
+                        {% for product in main_categories %}
+                            <a class="{% if forloop.first %}active show{% endif %}" data-bs-toggle="tab" href="#liton_tab_3_{{ forloop.counter }}">{{ product.product_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-content">
+                    {% for product in main_categories %}
+                        <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="liton_tab_3_{{ forloop.counter }}">
+                            <div class="ltn__product-tab-content-inner">
+                                <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                                    <!-- ltn__product-item -->
+                                    {% for sub_category in product.sub_categories.all %}
+                                        {% for last_sub_category in sub_category.last_sub_categories.all %}
+                                                <div class="col-lg-12">
+                                                    {% for product_image in last_sub_category.product_images.all|slice:":1" %}
+                                                        {% comment %} <div class="ltn__product-item ltn__product-item-3 text-center">
+                                                            <div class="product-img product-img-container"> {% endcomment %}
+                                                                <div class="ltn__blog-item ltn__blog-item-3 ltn__product-item-3 text-center">
+                                                                    <div class="ltn__blog-img">
+                                                                <a href="{% url 'app:product_description' last_sub_category.last_ctg_slug %}">
+                                                                    <img src="{{ product_image.image.url }}"  style="height:200px; width:300px;object-fit: cover;" alt="#">
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-info">
+                                                                <h2 class="product-title">
+                                                                    <a href="{% url 'app:product_description' last_sub_category.last_ctg_slug %}">
+                                                                        {{ last_sub_category.name }}
+                                                                    </a>
+                                                                </h2>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                        
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   
+    <!-- PRODUCT TAB AREA END -->
+
+    <!-- COUNTDOWN AREA START -->
+ 
+    <!-- COUNTDOWN AREA END -->
+
+    <!-- PRODUCT AREA START (product-item-3) -->
+    <div class="ltn__product-area ltn__product-gutter pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2 text-center">
+                        <h1 class="section-title">Featured Products</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__tab-product-slider-one-active--- slick-arrow-1">
+
+
+
+                <div class="row">
+                    <!-- ltn__product-item -->
+                    {% for product in last_sub_category %}
+                    {% for product_image in product.product_images.all|slice:":1" %}
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                        
+                        <div class="ltn__blog-item ltn__blog-item-3 ltn__product-item-3 text-center">
+                            <div class="ltn__blog-img">
+                                <a href="{% url 'app:product_description' product.last_ctg_slug %}"><img src="{{product_image.image.url}}"  style="height:200px; width:300px;object-fit: cover;" alt="#"></a>
+                               
+                       
+                            </div>
+                            <div class="product-info">
+                                
+                                <h2 class="product-title"><a href="{% url 'app:product_description' product.last_ctg_slug %}">{{product.name}}</a></h2>
+                                <div class="product-price">
+                                   
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    {% endfor%}
+                    <div class="text-center">
+           
+                        <div class="btn-wrapper animated">
+                            <a href="{% url 'app:allCategory' %}" class="theme-btn-1 btn btn-effect-1 text-uppercase">More</a>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+            
+        </div>
+      
+        
+    </div>
+    <!-- PRODUCT AREA END -->
+
+    <!-- VIDEO AREA START -->
+    <div class="ltn__video-popup-area ltn__video-popup-margin  pb-220 ">
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-lg-12">
+                    {% for item in slider|slice:1%}
+                    <div class="ltn__video-bg-img ltn__video-popup-height-600 bg-overlay-black-10-- bg-image" data-bg="{{ item.slider_img.url }}">
+                        {%endfor%}
+                        {}
+                        <a class="ltn__video-icon-2 ltn__video-icon-2-border" href="{{companyinfo.youtube_link}};showinfo=0" data-rel="lightcase:myCollection">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- VIDEO AREA END -->
+
+{% endblock %}
